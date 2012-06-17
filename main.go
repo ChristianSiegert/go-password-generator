@@ -13,7 +13,7 @@ var (
 	userCharacters         = flag.String("own", "", "Custom set of characters to use")
 	passwordCount          = flag.Int("count", 3, "Number of passwords to generate")
 	passwordLength         = flag.Int("length", 10, "Length of passwords")
-	verbose                = flag.Bool("verbose", true, "Display additional information")
+	verbose                = flag.Bool("verbose", false, "Display additional information")
 )
 
 func main() {
