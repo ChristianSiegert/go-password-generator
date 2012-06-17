@@ -1,22 +1,40 @@
 package main
 
 import (
-	"bytes"
-	"crypto/rand"
+	"flag"
 	"fmt"
-	"math/big"
 )
 
-var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-var runes = []rune(characters)
-var upperRandomLimit = big.NewInt(int64(len(runes)))
+var (
+	useLowerCaseCharacters = flag.Bool("lower", true, "Use lower-case characters a-z")
+	useUpperCaseCharacters = flag.Bool("upper", true, "Use upper-case characters A-Z")
+	useNumbers             = flag.Bool("numbers", true, "Use numbers 0-9")
+	useSpecialCharacters   = flag.Bool("special", false, "Use special characters !§$%&=?,.-;:_")
+	userCharacters         = flag.String("own", "", "Custom set of characters to use")
+	passwordCount          = flag.Int("count", 3, "Number of passwords to generate")
+	passwordLength         = flag.Int("length", 10, "Length of passwords")
+	verbose                = flag.Bool("verbose", true, "Display additional information")
+)
 
 func main() {
-	for i := 0; i < 10; i++ {
-		password, error := password(10)
+	flag.Parse()
+
+	generator, error := NewGenerator(*useLowerCaseCharacters, *useUpperCaseCharacters, *useNumbers, *useSpecialCharacters, *userCharacters, *passwordLength)
+
+	if error != nil {
+		fmt.Println("Error:", error)
+		return
+	}
+
+	if *verbose {
+		fmt.Println(additionalInformation(generator))
+	}
+
+	for i := 0; i < *passwordCount; i++ {
+		password, error := generator.Password(*passwordLength)
 
 		if error != nil {
-			fmt.Println("Couldn't generate password:", error)
+			fmt.Println("Error:", error)
 			continue
 		}
 
@@ -24,18 +42,14 @@ func main() {
 	}
 }
 
-func password(length int) (string, error) {
-	var buffer bytes.Buffer
+func additionalInformation(generator *Generator) string {
+	passwordCountInWords := ""
 
-	for i := 0; i < length; i++ {
-		index, error := rand.Int(rand.Reader, upperRandomLimit)
-
-		if error != nil {
-			return "", error
-		}
-
-		buffer.WriteRune(runes[index.Int64()])
+	if *passwordCount == 1 {
+		passwordCountInWords = "1 password"
+	} else {
+		passwordCountInWords = fmt.Sprintf("%d passwords", *passwordCount)
 	}
 
-	return buffer.String(), nil
+	return fmt.Sprintf("Generating %s with a length of %d from the following characters: %s", passwordCountInWords, *passwordLength, generator.characters)
 }
