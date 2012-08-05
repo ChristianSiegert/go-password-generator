@@ -22,12 +22,12 @@ Command-line arguments
 You can modify the output with these flags:
 
 - **--count**	Number of passwords to generate. Default is `3`.
+- **--custom**	Custom set of characters to include.
 - **--length**	Length of passwords. Default is `10`.
-- **--lower**	Use lower-case characters `a-z`. Default is `true`.
-- **--numbers**	Use numbers `0-9`. Default is `true`.
-- **--own**		Custom set of characters to use.
-- **--special**	Use special characters `!§$%&=?,.-;:_`. Default is `false`.
-- **--upper**	Use upper-case characters `A-Z`. Default is `true`.
+- **--lower**	Include lower-case characters `a-z`. Default is `true`.
+- **--numbers**	Include numbers `0-9`. Default is `true`.
+- **--special**	Include special characters `!§$%&=?,.-;:_`. Default is `false`.
+- **--upper**	Include upper-case characters `A-Z`. Default is `true`.
 - **--verbose**	Display additional information.
 
 Usage examples
@@ -43,4 +43,4 @@ Generate passwords that only contain lower-case characters:
 
 Generate 5 passwords with a length of 20 that can contain lower-case characters, upper-case characters, numbers and characters from the custom set `ñäöüéèê£€@`:
 
-	$ ./go-password-generator --count 5 --length 20 --own "ñäöüéèê£€@"
+	$ ./go-password-generator --count 5 --length 20 --custom "ñäöüéèê£€@"

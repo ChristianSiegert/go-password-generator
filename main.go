@@ -10,7 +10,7 @@ var (
 	useUpperCaseCharacters = flag.Bool("upper", true, "Use upper-case characters A-Z")
 	useNumbers             = flag.Bool("numbers", true, "Use numbers 0-9")
 	useSpecialCharacters   = flag.Bool("special", false, "Use special characters !§$%&=?,.-;:_")
-	userCharacters         = flag.String("own", "", "Custom set of characters to use")
+	customCharacters         = flag.String("custom", "", "Custom set of characters to use")
 	passwordCount          = flag.Int("count", 3, "Number of passwords to generate")
 	passwordLength         = flag.Int("length", 10, "Length of passwords")
 	verbose                = flag.Bool("verbose", false, "Display additional information")
@@ -19,7 +19,7 @@ var (
 func main() {
 	flag.Parse()
 
-	generator, error := NewGenerator(*useLowerCaseCharacters, *useUpperCaseCharacters, *useNumbers, *useSpecialCharacters, *userCharacters, *passwordLength)
+	generator, error := NewGenerator(*useLowerCaseCharacters, *useUpperCaseCharacters, *useNumbers, *useSpecialCharacters, *customCharacters, *passwordLength)
 
 	if error != nil {
 		fmt.Println("Error:", error)

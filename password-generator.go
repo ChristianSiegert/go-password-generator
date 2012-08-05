@@ -20,7 +20,7 @@ const (
 	specialCharacters   = "!§$%&=?,.-;:_"
 )
 
-func NewGenerator(useLowerCaseCharacters, useUpperCaseCharacters, useNumbers, useSpecialCharacters bool, userCharacters string, passwordLength int) (generator *Generator, error error) {
+func NewGenerator(useLowerCaseCharacters, useUpperCaseCharacters, useNumbers, useSpecialCharacters bool, customCharacters string, passwordLength int) (generator *Generator, error error) {
 	if passwordLength <= 0 {
 		error = errors.New("Passwords must be at least one character long.")
 		return
@@ -44,7 +44,7 @@ func NewGenerator(useLowerCaseCharacters, useUpperCaseCharacters, useNumbers, us
 		characterBuffer.WriteString(specialCharacters)
 	}
 
-	characterBuffer.WriteString(userCharacters)
+	characterBuffer.WriteString(customCharacters)
 
 	if characterBuffer.Len() <= 0 {
 		error = errors.New("Cannot generate password without any allowed characters.")
