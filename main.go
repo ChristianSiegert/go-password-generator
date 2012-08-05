@@ -11,8 +11,8 @@ var (
 	useNumbers             = flag.Bool("numbers", true, "Use numbers 0-9")
 	useSpecialCharacters   = flag.Bool("special", false, "Use special characters !§$%&=?,.-;:_")
 	customCharacters         = flag.String("custom", "", "Custom set of characters to use")
-	passwordCount          = flag.Int("count", 3, "Number of passwords to generate")
-	passwordLength         = flag.Int("length", 10, "Length of passwords")
+	passwordCount          = flag.Int("count", 10, "Number of passwords to generate")
+	passwordLength         = flag.Int("length", 20, "Length of passwords")
 	verbose                = flag.Bool("verbose", false, "Display additional information")
 )
 
