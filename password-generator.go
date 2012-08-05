@@ -26,6 +26,13 @@ func NewGenerator(useLowerCaseCharacters, useUpperCaseCharacters, useNumbers, us
 		return
 	}
 
+	// If user did not specify any character sets, use default ones.
+	if !useLowerCaseCharacters && !useUpperCaseCharacters && !useNumbers && !useSpecialCharacters && customCharacters == "" {
+		useLowerCaseCharacters = true
+		useUpperCaseCharacters = true
+		useNumbers = true
+	}
+
 	var characterBuffer bytes.Buffer
 
 	if useLowerCaseCharacters {

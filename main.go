@@ -6,13 +6,13 @@ import (
 )
 
 var (
-	useLowerCaseCharacters = flag.Bool("lower", true, "Use lower-case characters a-z")
-	useUpperCaseCharacters = flag.Bool("upper", true, "Use upper-case characters A-Z")
-	useNumbers             = flag.Bool("numbers", true, "Use numbers 0-9")
-	useSpecialCharacters   = flag.Bool("special", false, "Use special characters !§$%&=?,.-;:_")
-	customCharacters         = flag.String("custom", "", "Custom set of characters to use")
+	customCharacters       = flag.String("custom", "", "Custom set of characters to use")
 	passwordCount          = flag.Int("count", 10, "Number of passwords to generate")
 	passwordLength         = flag.Int("length", 20, "Length of passwords")
+	useLowerCaseCharacters = flag.Bool("lower", false, "Use lower-case characters a-z")
+	useNumbers             = flag.Bool("numbers", false, "Use numbers 0-9")
+	useSpecialCharacters   = flag.Bool("special", false, "Use special characters !§$%&=?,.-;:_")
+	useUpperCaseCharacters = flag.Bool("upper", false, "Use upper-case characters A-Z")
 	verbose                = flag.Bool("verbose", false, "Display additional information")
 )
 
