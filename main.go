@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/ChristianSiegert/go-password-generator/generator"
 )
 
 var (
@@ -19,7 +20,14 @@ var (
 func main() {
 	flag.Parse()
 
-	generator, error := NewGenerator(*useLowerCaseCharacters, *useUpperCaseCharacters, *useNumbers, *useSpecialCharacters, *customCharacters, *passwordLength)
+	generator, error := generator.NewGenerator(
+		*useLowerCaseCharacters,
+		*useUpperCaseCharacters,
+		*useNumbers,
+		*useSpecialCharacters,
+		*customCharacters,
+		*passwordLength,
+	)
 
 	if error != nil {
 		fmt.Println("Error:", error)
@@ -42,7 +50,7 @@ func main() {
 	}
 }
 
-func additionalInformation(generator *Generator) string {
+func additionalInformation(generator *generator.Generator) string {
 	passwordCountInWords := ""
 
 	if *passwordCount == 1 {
@@ -51,5 +59,10 @@ func additionalInformation(generator *Generator) string {
 		passwordCountInWords = fmt.Sprintf("%d passwords", *passwordCount)
 	}
 
-	return fmt.Sprintf("Generating %s with a length of %d from the following characters: %s", passwordCountInWords, *passwordLength, generator.characters)
+	return fmt.Sprintf(
+		"Generating %s with a length of %d from the following characters: %s",
+		passwordCountInWords,
+		*passwordLength,
+		generator.Characters(),
+	)
 }

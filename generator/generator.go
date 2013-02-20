@@ -1,4 +1,5 @@
-package main
+// Package generator implements a password generator.
+package generator
 
 import (
 	"bytes"
@@ -8,17 +9,17 @@ import (
 	"strings"
 )
 
-type Generator struct {
-	characters     string   // Characters a password is allowed to contain
-	characterRunes []rune   // Characters cached as runes
-	upperRandLimit *big.Int // Upper limit for random number generator
-}
-
 const (
 	lowerCaseCharacters = "abcdefghijklmnopqrstuvwxyz"
 	numbers             = "0123456789"
 	specialCharacters   = "!§$%&=?,.-;:_"
 )
+
+type Generator struct {
+	characters     string   // Characters a password is allowed to contain
+	characterRunes []rune   // Characters cached as runes
+	upperRandLimit *big.Int // Upper limit for random number generator
+}
 
 func NewGenerator(useLowerCaseCharacters, useUpperCaseCharacters, useNumbers, useSpecialCharacters bool, customCharacters string, passwordLength int) (generator *Generator, error error) {
 	if passwordLength <= 0 {
@@ -65,6 +66,13 @@ func NewGenerator(useLowerCaseCharacters, useUpperCaseCharacters, useNumbers, us
 	return
 }
 
+// Characters returns the characters the generator uses for generating
+// passwords.
+func (generator *Generator) Characters() string {
+	return generator.characters
+}
+
+// Password generates a password with the specified length.
 func (generator *Generator) Password(length int) (string, error) {
 	var passwordBuffer bytes.Buffer
 
