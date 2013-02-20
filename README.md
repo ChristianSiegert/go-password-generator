@@ -8,7 +8,7 @@ You can choose what character sets to use. You can also provide a custom set of 
 
 Check out the project with:
 
-	$ go get https://github.com/ChristianSiegert/go-password-generator.git
+	$ go get github.com/ChristianSiegert/go-password-generator
 
 You should now see the project files at `$GOPATH/src/github.com/ChristianSiegert/go-password-generator`. It was also built and then installed at `$GOPATH/bin`. You can execute it now with:
 
